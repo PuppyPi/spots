@@ -2,6 +2,7 @@ package rebound.spots.util;
 
 import java.io.IOException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.WriteListener;
 
 public class FlushPendingServletResponseOutputStream
 extends ServletOutputStream
@@ -159,5 +160,23 @@ extends ServletOutputStream
 	public String toString()
 	{
 		return this.underlying.toString();
+	}
+	
+	
+	
+	
+	
+	
+	//// New for Servlet API > 2.5 ! ////
+	@Override
+	public boolean isReady()
+	{
+		return this.underlying.isReady();
+	}
+	
+	@Override
+	public void setWriteListener(WriteListener writeListener)
+	{
+		this.underlying.setWriteListener(writeListener);
 	}
 }

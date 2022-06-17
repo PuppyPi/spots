@@ -2,7 +2,10 @@ package rebound.spots.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.Locale;
+import java.util.Map;
+import java.util.function.Supplier;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
  * Send the final flush and close with {@link #reallyClose()}!
  * And do an actual flush with {@link #reallyFlush()}
  */
-@SuppressWarnings("deprecation")
 public class FlushPendingServletResponseDecorator
 implements HttpServletResponse
 {
@@ -118,6 +120,7 @@ implements HttpServletResponse
 		return this.underlying.encodeRedirectURL(arg0);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public String encodeRedirectUrl(String arg0)
 	{
@@ -130,6 +133,7 @@ implements HttpServletResponse
 		return this.underlying.encodeURL(arg0);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public String encodeUrl(String arg0)
 	{
@@ -244,6 +248,7 @@ implements HttpServletResponse
 		this.underlying.setLocale(arg0);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void setStatus(int arg0, String arg1)
 	{
@@ -254,5 +259,48 @@ implements HttpServletResponse
 	public void setStatus(int arg0)
 	{
 		this.underlying.setStatus(arg0);
+	}
+	
+	
+	
+	//// New for Servlet API > 2.5 ! ////
+	@Override
+	public void setContentLengthLong(long len)
+	{
+		this.underlying.setContentLengthLong(len);
+	}
+	
+	@Override
+	public int getStatus()
+	{
+		return this.underlying.getStatus();
+	}
+	
+	@Override
+	public String getHeader(String name)
+	{
+		return this.underlying.getHeader(name);
+	}
+	
+	@Override
+	public Collection<String> getHeaders(String name)
+	{
+		return this.underlying.getHeaders(name);
+	}
+	
+	@Override
+	public Collection<String> getHeaderNames()
+	{
+		return this.underlying.getHeaderNames();
+	}
+	
+	public void setTrailerFields(Supplier<Map<String, String>> supplier)
+	{
+		this.underlying.setTrailerFields(supplier);
+	}
+	
+	public Supplier<Map<String, String>> getTrailerFields()
+	{
+		return this.underlying.getTrailerFields();
 	}
 }
