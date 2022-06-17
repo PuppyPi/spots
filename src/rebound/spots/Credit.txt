@@ -1,0 +1,14 @@
+Stripes is a servlet+jsp mvc framework created by Tim Fennell at http://stripes.mc4j.org/
+
+Spots is another mvc framework, but one that uses Filters for the resolving and doesn't automatically repopulate forms when they are invalid.
+
+Spots takes alot of things from Stripes, but not everything.
+
+
+Also included in spots util is a couple of classes from the Apache Commons Fileupload project
+	This is because I needed to change a couple of things to make it work for Spots (namely visibility)
+	An added benefit though, is that Spots has no external dependencies.
+
+I hope there aren't any licensing issues with this.
+
+	--Gotta Love Open-Source!
