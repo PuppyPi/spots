@@ -19,7 +19,6 @@ import rebound.spots.util.apacheupload.MultipartStream;
 import rebound.util.MIMEHeaders;
 import rebound.util.MIMEHeaders.Header;
 import rebound.util.MimeTypeParameterList;
-import com.ecoops.core.Root;
 
 /**
  * Yes. Another multipart resolving filter. Get over it.<br>
@@ -244,7 +243,8 @@ extends AbstractHTTPFilter
 								
 								else
 								{
-									Root.getPostmaster().notifyUnexpectedEvent("--------------------------------------------------------------------------------------------------------------------------Nested Multiparts!-------------------------------------------------------------------------------------------------------------------------- just thought you ought ta know.");
+									//TODO Softcode a notification system for here ^^''
+									//		Root.getPostmaster().notifyUnexpectedEvent("--------------------------------------------------------------------------------------------------------------------------Nested Multiparts!-------------------------------------------------------------------------------------------------------------------------- just thought you ought ta know.");
 									
 									//Multiple files
 									byte[] filesBoundary = null;
