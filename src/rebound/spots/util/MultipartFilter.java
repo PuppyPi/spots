@@ -4,6 +4,7 @@
  */
 package rebound.spots.util;
 
+import static rebound.util.collections.CollectionUtilities.*;
 import java.awt.datatransfer.MimeTypeParseException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -317,7 +318,8 @@ extends AbstractHTTPFilter
 										filesContinewe = filesMultipartStream.readBoundary();
 									}
 									
-									((ArrayList)filesvalue).trimToSize();
+									
+									trimToSize(filesvalue);
 								}
 							}
 						}
