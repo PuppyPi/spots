@@ -4,7 +4,6 @@
  */
 package rebound.spots.util;
 
-import static rebound.util.collections.CollectionUtilities.*;
 import java.awt.datatransfer.MimeTypeParseException;
 import java.io.IOException;
 import java.io.InputStream;
