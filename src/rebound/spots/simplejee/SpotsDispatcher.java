@@ -12,13 +12,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import rebound.simplejee.AbstractHttpServlet;
+import rebound.simplejee.SimpleJEEUtilities;
 import rebound.spots.ActionBean;
 import rebound.spots.ActionBeanContext;
+import rebound.util.collections.PairOrdered;
 
 public class SpotsDispatcher
 {
 	/**
 	 * You might want to not just pass {@link #getActionBeanClass(String, Class)} or similar into here in your {@link AbstractHttpServlet#serviceHttp(HttpServletRequest, HttpServletResponse)} implementation, but consider making your own getActionBeanClass(String) (especially if your URLs can have database-based non-static parts!) so that other things in the system can check URLs (really URI path parts) to see if they're servable by your webapp!  (eg, when selecting a name for the dynamic user-generated part to tell if it overlaps with a page! like if they try making their username be "about" or "robots.txt" XD )
+	 * Or better, usually, write a method <code>public static {@link PairOrdered}<Class, String> getActionBeanClassAndViewResourcePathname(String requestURIPath)</code> or similar, which also provides the default resource pathname that *would* be used (whether it is or not) by the Action Bean for {@link SimpleJEEUtilities#serveStatically(ServletContext, HttpServletRequest, HttpServletResponse, String)} or {@link SimpleJEEUtilities#serveJSP(ServletContext, HttpServletRequest, HttpServletResponse, String)} :>
 	 * 
 	 * @param servletContext  usually from {@link Servlet#getServletConfig()}.{@link ServletConfig#getServletContext()}
 	 * @param request  usually from {@link AbstractHttpServlet#serviceHttp(HttpServletRequest, HttpServletResponse)}
@@ -117,8 +120,7 @@ public class SpotsDispatcher
 			return null;
 		
 		//Trim trailing slash
-		if (requestURIPath.endsWith("/"))
-			requestURIPath = requestURIPath.substring(0, requestURIPath.length()-1);
+		requestURIPath = rtrimstr(requestURIPath, "/");
 		
 		//The stem section is between the prefix and the suffix
 		String actionBeanStem;
