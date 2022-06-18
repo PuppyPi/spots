@@ -8,7 +8,7 @@ import java.lang.annotation.Annotation;
 import java.util.List;
 import rebound.spots.ActionBeanContext;
 import rebound.spots.annotated.typeconversion.TypeConverter;
-import rebound.spots.util.MultipartFilter;
+import rebound.spots.util.fileupload.MultipartFilter;
 
 public class FilesValueTypeConverter
 implements TypeConverter<FormBoundFiles>

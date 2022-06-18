@@ -2,7 +2,7 @@
  * Created on Jan 30, 2008
  * 	by the wonderful Eclipse(c)
  */
-package rebound.spots.util;
+package rebound.spots.util.fileupload;
 
 import javax.servlet.ServletRequest;
 

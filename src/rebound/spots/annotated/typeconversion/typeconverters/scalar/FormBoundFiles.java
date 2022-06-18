@@ -9,8 +9,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import rebound.spots.annotated.typeconversion.ConverterSpecifier;
-import rebound.spots.util.AcceptFilter;
-import rebound.spots.util.MultipartFilter;
+import rebound.spots.util.fileupload.AcceptFilter;
+import rebound.spots.util.fileupload.MultipartFilter;
 
 /**
  * Note: This must be used in conjunction with {@link MultipartFilter}.<br>

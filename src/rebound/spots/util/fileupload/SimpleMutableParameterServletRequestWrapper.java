@@ -2,7 +2,7 @@
  * Created on Jan 30, 2008
  * 	by the wonderful Eclipse(c)
  */
-package rebound.spots.util;
+package rebound.spots.util.fileupload;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,9 +12,11 @@ import java.util.Map;
 import java.util.Set;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletRequestWrapper;
+import javax.servlet.http.HttpServletRequest;
+import rebound.spots.util.MutableParameterServletRequest;
 
 /**
- * This class should never be used, but is provided as a backup in case no filter wraps the request in a subclass of {@link MutableParameterServletRequest} before it reaches the {@link MultipartFilter}.<br>
+ * This class should never be used (IT DOESN'T IMPLEMENT {@link HttpServletRequest HTTPSERVLETREQUEST}!!!), but is provided as a backup in case no filter wraps the request in a subclass of {@link MutableParameterServletRequest} before it reaches the {@link MultipartFilter}.<br>
  * @author Sean
  */
 public class SimpleMutableParameterServletRequestWrapper
