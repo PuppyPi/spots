@@ -33,7 +33,7 @@ import rebound.util.MimeTypeParameterList;
  * @see Datastore
  * @author RProgrammer
  */
-public abstract class MultipartFilter
+public abstract class MultipartFilter<D>
 extends AbstractHTTPFilter
 {
 	public static final String STORAGE_ATTRIBUTE_PREFIX = "filesvalue_";
@@ -50,7 +50,7 @@ extends AbstractHTTPFilter
 		if (request.getContentType() != null && request.getContentType().startsWith("multipart"))
 		{
 			AcceptFilter acceptFilter = getAcceptFilter(request, response);
-			Datastore datastore = getDatastore(request, response);
+			Datastore<D> datastore = getDatastore(request, response);
 			
 			byte[] boundary = null;
 			{
@@ -188,15 +188,15 @@ extends AbstractHTTPFilter
 						{
 							//File form data
 							{
-								List<FileValue> filesvalue = null;
+								List<FileValue<D>> filesvalue = null;
 								{
 									String name = STORAGE_ATTRIBUTE_PREFIX+formFieldName;
 									Object o = request.getAttribute(name);
 									if (o instanceof List)
-										filesvalue = (List<FileValue>)o;
+										filesvalue = (List<FileValue<D>>)o;
 									if (filesvalue == null)
 									{
-										filesvalue = new ArrayList<FileValue>();
+										filesvalue = new ArrayList<FileValue<D>>();
 										request.setAttribute(name, filesvalue);
 									}
 								}
@@ -223,7 +223,7 @@ extends AbstractHTTPFilter
 										//Single file
 										InputStream dataIn = multipartStream.newInputStream();
 										
-										Object filehandle = datastore.store(dataIn, -1, filename, contentType);
+										D filehandle = datastore.store(dataIn, -1, filename, contentType);
 										
 										if (filehandle == null)
 										{
@@ -231,7 +231,7 @@ extends AbstractHTTPFilter
 											multipartStream.discardBodyData();
 										}
 										
-										FileValue value = new FileValue();
+										FileValue<D> value = new FileValue<>();
 										value.setContentType(contentType);
 										value.setFilename(filename);
 										value.setFilehandle(filehandle);
@@ -297,7 +297,7 @@ extends AbstractHTTPFilter
 											
 											InputStream currDataIn = multipartStream.newInputStream();
 											
-											Object currFilehandle = datastore.store(currDataIn, -1, currFilename, currContentType);
+											D currFilehandle = datastore.store(currDataIn, -1, currFilename, currContentType);
 											
 											if (currFilehandle == null)
 											{
@@ -306,7 +306,7 @@ extends AbstractHTTPFilter
 											}
 											
 											
-											FileValue currValue = new FileValue();
+											FileValue<D> currValue = new FileValue<>();
 											currValue.setContentType(currContentType);
 											currValue.setFilename(currFilename);
 											currValue.setFilehandle(currFilehandle);
@@ -389,5 +389,5 @@ extends AbstractHTTPFilter
 	
 	public abstract AcceptFilter getAcceptFilter(HttpServletRequest request, HttpServletResponse response);
 	
-	public abstract Datastore getDatastore(HttpServletRequest request, HttpServletResponse response);
+	public abstract Datastore<D> getDatastore(HttpServletRequest request, HttpServletResponse response);
 }

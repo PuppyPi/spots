@@ -7,7 +7,7 @@ package rebound.spots.util;
 import java.io.IOException;
 import java.io.InputStream;
 
-public interface Datastore
+public interface Datastore<D>
 {
 	/**
 	 * Store the data and create a reference to it.<br>
@@ -20,5 +20,5 @@ public interface Datastore
 	 * @param contentType The content-type the user provided. This is optional and may very well be null.
 	 * @return An application-specific reference to the data (this should almost never be a huge byte[] for memory reasons), or null if a non IO related error occurred.
 	 */
-	public Object store(InputStream data, long length, String filename, String contentType) throws IOException;
+	public D store(InputStream data, long length, String filename, String contentType) throws IOException;
 }
