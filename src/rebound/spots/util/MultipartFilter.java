@@ -189,13 +189,14 @@ extends AbstractHTTPFilter
 						{
 							//File form data
 							{
-								List<FileValue<D>> filesvalue = null;
+								final List<FileValue<D>> filesvalue;
 								{
 									String name = STORAGE_ATTRIBUTE_PREFIX+formFieldName;
 									Object o = request.getAttribute(name);
+									
 									if (o instanceof List)
 										filesvalue = (List<FileValue<D>>)o;
-									if (filesvalue == null)
+									else
 									{
 										filesvalue = new ArrayList<FileValue<D>>();
 										request.setAttribute(name, filesvalue);
