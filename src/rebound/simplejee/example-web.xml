@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<!-- In Simple JEE, only the class name of the toplevel servlet should be changed from this file! -->
+<!-- In SimpleJEE, only the class name of the toplevel servlet should be changed from this file! -->
 
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
