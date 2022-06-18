@@ -8,10 +8,10 @@ package rebound.spots.util;
  * Represents a single file in the value of a "file" type HTML Form Field (because the user could have selected multiple files).<br>
  * @author Sean
  */
-public class FileValue
+public class FileValue<D>
 {
 	protected String filename, contentType;
-	protected Object filehandle;
+	protected D filehandle;
 	
 	
 	public String getFilename()
@@ -34,12 +34,12 @@ public class FileValue
 		this.contentType = contentType;
 	}
 
-	public Object getFilehandle()
+	public D getFilehandle()
 	{
 		return this.filehandle;
 	}
 
-	public void setFilehandle(Object filehandle)
+	public void setFilehandle(D filehandle)
 	{
 		this.filehandle = filehandle;
 	}
