@@ -7,6 +7,7 @@ package rebound.spots.util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import rebound.annotations.hints.IntendedToBeSubclassedImplementedOrOverriddenByApiUser;
 import rebound.spots.ActionBean;
 import rebound.spots.ActionBeanContext;
 
@@ -34,14 +35,16 @@ implements ActionBean
 	 * You may override this to change it, but by default, it pulls from the configuration.<br>
 	 * It controls the level of output.<br>
 	 */
+	@IntendedToBeSubclassedImplementedOrOverriddenByApiUser
 	public boolean isDebug()
 	{
-		return "true".equalsIgnoreCase(getContext().getAParameter("debug"));
+		return false;
 	}
 	
+	@IntendedToBeSubclassedImplementedOrOverriddenByApiUser
 	public boolean isBenchmarking()
 	{
-		return "true".equalsIgnoreCase(getContext().getAParameter("benchmark")) || isDebug(); 
+		return isDebug(); 
 	}
 	
 	public void log(String msg)

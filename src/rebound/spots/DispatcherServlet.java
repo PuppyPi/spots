@@ -197,7 +197,7 @@ extends HttpServlet
 	
 	
 	protected class MyActionBeanContext
-	implements ActionBeanContext
+	implements ExtraActionBeanContext
 	{
 		protected HttpServletRequest request;
 		protected HttpServletResponse response;
