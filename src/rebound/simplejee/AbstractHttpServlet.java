@@ -26,10 +26,10 @@ extends AbstractServlet
 	public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException
 	{
 		if (!(request instanceof HttpServletRequest))
-			throw new ServletException("ServletRequest that wasn't an HttpServletRequest was given to us, an HTTP-expecting Servlet!");
+			throw new ServletException("a ServletRequest that wasn't an HttpServletRequest was given to us, an HTTP-expecting Servlet!");
 		
 		if (!(response instanceof HttpServletResponse))
-			throw new ServletException("ServletResponse that wasn't an HttpServletResponse was given to us, an HTTP-expecting Servlet!");
+			throw new ServletException("a ServletResponse that wasn't an HttpServletResponse was given to us, an HTTP-expecting Servlet!");
 		
 		serviceHttp((HttpServletRequest) request, (HttpServletResponse) response);
 	}
