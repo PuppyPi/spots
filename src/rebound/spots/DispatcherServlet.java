@@ -386,14 +386,14 @@ extends HttpServlet
 		log(msg, true); //Show rarely
 	}
 	
-	public void log(String msg, boolean debug)
+	public void log(String msg, boolean quiet)
 	{
-		if (!debug || isDebug())
+		if (!quiet || isDebug())
 		{
-//			super.log(msg);
+			//super.log(msg);
 			
 			@SuppressWarnings("resource")   //Eclipse, my friend, buddy..we don't want to close things we didn't open!  ESPECIALLY STDOUT/ERR X'DDD
-			PrintStream out = debug ? System.out : System.err;
+			PrintStream out = quiet ? System.out : System.err;
 			
 			out.println("DispatcherServlet"+new Date()+") "+msg);
 		}
@@ -404,13 +404,13 @@ extends HttpServlet
 		log(msg, exc, false); //Show always
 	}
 	
-	public void log(String msg, Throwable exc, boolean debug)
+	public void log(String msg, Throwable exc, boolean quiet)
 	{
-		if (!debug || isDebug())
+		if (!quiet || isDebug())
 		{
-//			super.log(msg, exc);
+			//super.log(msg, exc);
 			
-			PrintStream out = debug ? System.out : System.err;
+			PrintStream out = quiet ? System.out : System.err;
 			out.println("DispatcherServlet"+new Date()+") "+msg);
 			out.println(exc.getClass().getName()+": "+exc.getMessage());
 			exc.printStackTrace(out);
