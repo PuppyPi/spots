@@ -2,7 +2,7 @@
  * Created on Nov 25, 2007
  * 	by the great Eclipse(c)
  */
-package rebound.spots.util.fileupload;
+package rebound.spots.traditionaljee.util.fileupload;
 
 import java.awt.datatransfer.MimeTypeParseException;
 import java.io.IOException;
@@ -15,9 +15,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import rebound.io.util.TextIOUtilities;
-import rebound.spots.util.AbstractHTTPFilter;
-import rebound.spots.util.MutableParameterServletRequest;
-import rebound.spots.util.fileupload.apacheupload.MultipartStream;
+import rebound.spots.traditionaljee.util.AbstractHTTPFilter;
+import rebound.spots.traditionaljee.util.MutableParameterServletRequest;
+import rebound.spots.traditionaljee.util.fileupload.apacheupload.MultipartStream;
 import rebound.util.MIMEHeaders;
 import rebound.util.MIMEHeaders.Header;
 import rebound.util.MimeTypeParameterList;

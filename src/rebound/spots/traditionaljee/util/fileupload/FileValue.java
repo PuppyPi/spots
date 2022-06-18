@@ -2,7 +2,7 @@
  * Created on Jan 30, 2008
  * 	by the wonderful Eclipse(c)
  */
-package rebound.spots.util.fileupload;
+package rebound.spots.traditionaljee.util.fileupload;
 
 /**
  * Represents a single file in the value of a "file" type HTML Form Field (because the user could have selected multiple files).<br>

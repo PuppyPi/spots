@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package rebound.spots.util.fileupload.apacheupload;
+package rebound.spots.traditionaljee.util.fileupload.apacheupload;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

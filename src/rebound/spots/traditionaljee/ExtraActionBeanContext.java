@@ -1,4 +1,6 @@
-package rebound.spots;
+package rebound.spots.traditionaljee;
+
+import rebound.spots.ActionBeanContext;
 
 public interface ExtraActionBeanContext
 extends ActionBeanContext

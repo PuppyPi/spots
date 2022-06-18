@@ -2,7 +2,7 @@
  * Created on May 23, 2007
  * 	by the great Eclipse(c)
  */
-package rebound.spots;
+package rebound.spots.traditionaljee;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -15,6 +15,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import rebound.spots.ActionBean;
+import rebound.spots.ActionBeanContext;
 
 
 /**

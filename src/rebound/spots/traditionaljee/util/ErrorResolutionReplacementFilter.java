@@ -2,7 +2,7 @@
  * Created on Feb 28, 2008
  * 	by the wonderful Eclipse(c)
  */
-package rebound.spots.util;
+package rebound.spots.traditionaljee.util;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;

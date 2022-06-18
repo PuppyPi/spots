@@ -1,4 +1,4 @@
-package rebound.spots.simplejee;
+package rebound.spots;
 
 import static rebound.net.NetworkUtilities.*;
 import static rebound.text.StringUtilities.*;
@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import rebound.simplejee.AbstractHttpServlet;
 import rebound.simplejee.SimpleJEEUtilities;
-import rebound.spots.ActionBean;
-import rebound.spots.ActionBeanContext;
 import rebound.util.collections.PairOrdered;
 
 public class SpotsDispatcher
