@@ -1,4 +1,4 @@
-package rebound.spots.util;
+package rebound.simplejee;
 
 import java.io.PrintWriter;
 import java.util.Locale;

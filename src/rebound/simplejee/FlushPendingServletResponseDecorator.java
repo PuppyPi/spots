@@ -1,4 +1,4 @@
-package rebound.spots.util;
+package rebound.simplejee;
 
 import java.io.IOException;
 import java.io.PrintWriter;
