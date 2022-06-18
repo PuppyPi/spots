@@ -318,9 +318,6 @@ extends AbstractHTTPFilter
 										
 										filesContinewe = filesMultipartStream.readBoundary();
 									}
-									
-									
-									trimToSize(filesvalue);
 								}
 							}
 						}
