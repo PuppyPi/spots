@@ -24,6 +24,8 @@ import java.io.UnsupportedEncodingException;
 import org.apache.commons.fileupload.util.Closeable;
 import rebound.io.util.JRECompatIOUtilities;
 
+//The core from the Apache File Upload project!  (that's all we need, no need for a dependency :> )
+
 /**
  * <p>
  * Low level API for processing file uploads.
