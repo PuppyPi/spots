@@ -395,7 +395,7 @@ extends HttpServlet
 			@SuppressWarnings("resource")   //Eclipse, my friend, buddy..we don't want to close things we didn't open!  ESPECIALLY STDOUT/ERR X'DDD
 			PrintStream out = quiet ? System.out : System.err;
 			
-			out.println("DispatcherServlet"+new Date()+") "+msg);
+			out.println("DispatcherServlet "+new Date()+") "+msg);
 		}
 	}
 	
@@ -411,7 +411,7 @@ extends HttpServlet
 			//super.log(msg, exc);
 			
 			PrintStream out = quiet ? System.out : System.err;
-			out.println("DispatcherServlet"+new Date()+") "+msg);
+			out.println("DispatcherServlet "+new Date()+") "+msg);
 			out.println(exc.getClass().getName()+": "+exc.getMessage());
 			exc.printStackTrace(out);
 		}
