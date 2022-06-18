@@ -51,8 +51,6 @@ import javax.servlet.http.HttpServletResponse;
 public class DispatcherServlet
 extends HttpServlet
 {
-	private static final long serialVersionUID = 1L;
-	
 	public static final String RESOLVED_ATTRIBUTE = "actionBean.class";
 	public static final String EXCEPTION_HANDLER_ATTRIBUTE = "exceptionHandler.class";
 	
