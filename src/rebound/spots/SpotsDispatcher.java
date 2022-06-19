@@ -16,6 +16,7 @@ import rebound.simplejee.SimpleJEEUtilities;
 import rebound.spots.util.SimpleImmutableActionBeanContext;
 import rebound.spots.util.SpotsDispatcherForBeansWithViewResourcePath;
 import rebound.util.collections.PairOrdered;
+import rebound.util.functional.FunctionInterfaces.UnaryProcedure;
 
 /**
  * This is the heart and soul of Spots!
@@ -32,25 +33,23 @@ import rebound.util.collections.PairOrdered;
 public class SpotsDispatcher
 {
 	/**
-	 * This method is actually rarely used and serves as just an example for all but the simplest of webservers/webapps.
-	 * See {@link SpotsDispatcherForBeansWithViewResourcePath} for a typical web server (that uses some kind of pathname-based "view" resources like .jsp pages or static files (eg, .js/.css) )
-	 * 
 	 * You might want to not just pass {@link #getActionBeanClass(String, Class)} or similar into here in your {@link AbstractHttpServlet#serviceHttp(HttpServletRequest, HttpServletResponse)} implementation, but consider making your own getActionBeanClass(String) (especially if your URLs can have database-based non-static parts!) so that other things in the system can check URLs (really URI path parts) to see if they're servable by your webapp!  (eg, when selecting a name for the dynamic user-generated part to tell if it overlaps with a page! like if they try making their username be "about" or "robots.txt" XD )
 	 * Or better, usually, write a method <code>public static {@link PairOrdered}<Class, String> getActionBeanClassAndViewResourcePathname(String requestURIPath)</code> or similar, which also provides the default resource pathname that *would* be used (whether it is or not) by the Action Bean for {@link SimpleJEEUtilities#serveStatically(ServletContext, HttpServletRequest, HttpServletResponse, String)} or {@link SimpleJEEUtilities#serveJSP(ServletContext, HttpServletRequest, HttpServletResponse, String)} :>
 	 * 
 	 * @param servletContext  usually from {@link Servlet#getServletConfig()}.{@link ServletConfig#getServletContext()}
 	 * @param request  usually from {@link AbstractHttpServlet#serviceHttp(HttpServletRequest, HttpServletResponse)}
 	 * @param response  usually from {@link AbstractHttpServlet#serviceHttp(HttpServletRequest, HttpServletResponse)}
+	 * @param initializeActionBean  set things like the viewResourcePath if your system uses that, and/or database connections, and/or caches, and/or alllllll the things that would otherwise need to be passed around through static variables in Traditional JEE that can be done in the Java way in Simple JEE! :D  (or just no-op if you want, that's fine too XD )
 	 * @param actionBeanClass  usually from {@link #getActionBeanClass(String, Class)} or similar (which, itself, pulls from {@link #getActionBeanClassName(String, String, String)} or similar)
 	 * @param verbose  log even non error hits to {@link ServletContext#log(String)} ?
 	 */
-	public static void dispatch(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Class<? extends ActionBean> actionBeanClass, boolean verbose) throws ServletException, IOException
+	public static <T extends ActionBean> void dispatch(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Class<T> actionBeanClass, @Nonnull UnaryProcedure<? super T> initializeActionBean, boolean verbose) throws ServletException, IOException
 	{
 		//Try to instantiate and run an actionbean
 		//Don't pay any attention to the HTTP METHOD, the beans take care of that.
 		
 		
-		ActionBean bean = newActionBean(actionBeanClass, servletContext, request, response);
+		T bean = newActionBean(actionBeanClass, servletContext, request, response);
 		
 		
 		//<Use bean
@@ -64,6 +63,8 @@ public class SpotsDispatcher
 		{
 			if (verbose)
 				servletContext.log("Invoking "+actionBeanClass.getName()+" for "+request.getRequestURI());
+			
+			initializeActionBean.f(bean);
 			
 			bean.doAction();
 		}
