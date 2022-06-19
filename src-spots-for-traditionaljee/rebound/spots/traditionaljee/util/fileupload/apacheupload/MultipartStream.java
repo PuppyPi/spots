@@ -21,7 +21,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import org.apache.commons.fileupload.util.Closeable;
 import rebound.io.util.JRECompatIOUtilities;
 
 //The core from the Apache File Upload project!  (that's all we need, no need for a dependency :> )
@@ -642,7 +641,6 @@ public class MultipartStream
 	 */
 	public class EncapsulationInputStream
 	extends InputStream
-	implements Closeable
 	{
 		/**
 		 * The number of bytes, which have been read so far.
