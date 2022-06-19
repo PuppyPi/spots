@@ -5,7 +5,7 @@
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
-package rebound.util;
+package rebound.spots.traditionaljee.util.fileupload.fromothers;
 
 import java.awt.datatransfer.MimeTypeParseException;
 import java.util.Enumeration;

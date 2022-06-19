@@ -17,10 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import rebound.io.util.TextIOUtilities;
 import rebound.spots.traditionaljee.util.AbstractHTTPFilter;
 import rebound.spots.traditionaljee.util.MutableParameterServletRequest;
-import rebound.spots.traditionaljee.util.fileupload.apacheupload.MultipartStream;
+import rebound.spots.traditionaljee.util.fileupload.fromothers.MimeTypeParameterList;
+import rebound.spots.traditionaljee.util.fileupload.fromothers.MultipartStream;
 import rebound.util.MIMEHeaders;
 import rebound.util.MIMEHeaders.Header;
-import rebound.util.MimeTypeParameterList;
 
 /**
  * Yes. Another multipart resolving filter. Get over it.<br>
