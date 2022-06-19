@@ -16,6 +16,18 @@ import rebound.simplejee.SimpleJEEUtilities;
 import rebound.spots.util.SimpleImmutableActionBeanContext;
 import rebound.util.collections.PairOrdered;
 
+/**
+ * This is the heart and soul of Spots!
+ * Honestly, this *is* Spots! XD
+ * Everything else (namely the annotation-based form parameter decoding and binding) is just optional niceties :3
+ * 
+ * This is the core of the Spots Philosophy for web servers XD
+ * Ie, that each individual request be handled by a separate Java object (an {@link ActionBean})!
+ * (as opposed to {@link Servlet}s, where one object handles many requests (usually involving multithreading o,o ))
+ * 
+ * You can use a stock servlet (like in Spots/TraditionalJEE), or write your own (the SimpleJEE way!).
+ * But either way, this class stores all the important (and security-risky-to-edit) code as just normal code, no web.xml-related things or loosey-goosey {@link String}-based "attributes" and "parameters" passing Java objects between code here! :D
+ */
 public class SpotsDispatcher
 {
 	/**
