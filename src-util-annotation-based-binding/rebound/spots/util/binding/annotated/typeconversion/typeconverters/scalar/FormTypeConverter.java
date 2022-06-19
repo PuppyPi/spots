@@ -2,11 +2,11 @@
  * Created on Jun 6, 2007
  * 	by the great Eclipse(c)
  */
-package rebound.spots.annotated.typeconversion.typeconverters.scalar;
+package rebound.spots.util.binding.annotated.typeconversion.typeconverters.scalar;
 
 import java.lang.annotation.Annotation;
 import rebound.spots.ActionBeanContext;
-import rebound.spots.annotated.typeconversion.TypeConverter;
+import rebound.spots.util.binding.annotated.typeconversion.TypeConverter;
 
 /**
  * Simply takes textual parameters out of the form and puts them into bindings.<br>

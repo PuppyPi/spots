@@ -2,7 +2,7 @@
  * Created on Oct 4, 2007
  * 	by the wonderful Eclipse(c)
  */
-package rebound.spots.annotated.typeconversion;
+package rebound.spots.util.binding.annotated.typeconversion;
 
 //Note: This was part of the Chained system of TypeConverters
 //todo Implement this in the filter TCs

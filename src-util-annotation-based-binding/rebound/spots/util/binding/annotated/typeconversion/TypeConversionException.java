@@ -2,7 +2,7 @@
  * Created on Sep 30, 2007
  * 	by the wonderful Eclipse(c)
  */
-package rebound.spots.annotated.typeconversion;
+package rebound.spots.util.binding.annotated.typeconversion;
 
 import java.lang.annotation.Annotation;
 

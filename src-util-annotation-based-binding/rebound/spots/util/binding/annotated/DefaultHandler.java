@@ -2,7 +2,7 @@
  * Created on Jun 3, 2007
  * 	by the great Eclipse(c)
  */
-package rebound.spots.annotated;
+package rebound.spots.util.binding.annotated;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

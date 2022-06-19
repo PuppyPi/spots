@@ -2,11 +2,11 @@
  * Created on Jun 2, 2007
  * 	by the great Eclipse(c)
  */
-package rebound.spots.annotated;
+package rebound.spots.util.binding.annotated;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import rebound.spots.annotated.typeconversion.TypeConverterManager;
+import rebound.spots.util.binding.annotated.typeconversion.TypeConverterManager;
 
 /**
  * This class wraps up an error which occurred while binding a method to a form field.<br>

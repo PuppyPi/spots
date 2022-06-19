@@ -2,7 +2,7 @@
  * Created on Jun 2, 2007
  * 	by the great Eclipse(c)
  */
-package rebound.spots.annotated;
+package rebound.spots.util.binding.annotated;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -10,7 +10,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
-import rebound.spots.annotated.BindingException.Type;
+import rebound.spots.util.binding.annotated.BindingException.Type;
 
 
 /**

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import rebound.simplejee.AbstractHttpServlet;
 import rebound.simplejee.SimpleJEEUtilities;
+import rebound.spots.util.SimpleImmutableActionBeanContext;
 import rebound.util.collections.PairOrdered;
 
 public class SpotsDispatcher
@@ -52,6 +53,8 @@ public class SpotsDispatcher
 		}
 		//Use bean>
 	}
+	
+	
 	
 	
 	
@@ -169,6 +172,19 @@ public class SpotsDispatcher
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * @param actionBeanClassName  straight from {@link #getActionBeanClassName(String, String, String)}
 	 * @param defaultActionBeanClass  for 404's and otherwise invalid URI paths
@@ -203,19 +219,6 @@ public class SpotsDispatcher
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	//<Beany
 	/**
 	 * Instantiate an {@link ActionBean} and invoke {@link ActionBean#setContext(ActionBeanContext)} on it with a newly created {@link ActionBeanContext}.<br>
 	 * @return The action bean all initted and its context set, or <code>null</code> if there was an error instantiating it (which has been {@link ServletContext#log(String, Throwable) logged}.
@@ -260,39 +263,4 @@ public class SpotsDispatcher
 		
 		return null;
 	}
-	
-	
-	
-	
-	public static class SimpleImmutableActionBeanContext
-	implements ActionBeanContext
-	{
-		protected final HttpServletRequest request;
-		protected final HttpServletResponse response;
-		protected final ServletContext servletContext;
-		
-		public SimpleImmutableActionBeanContext(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext)
-		{
-			this.request = request;
-			this.response = response;
-			this.servletContext = servletContext;
-		}
-		
-		
-		public HttpServletRequest getRequest()
-		{
-			return request;
-		}
-		
-		public HttpServletResponse getResponse()
-		{
-			return response;
-		}
-		
-		public ServletContext getServletContext()
-		{
-			return servletContext;
-		}
-	}
-	//Beany>
 }

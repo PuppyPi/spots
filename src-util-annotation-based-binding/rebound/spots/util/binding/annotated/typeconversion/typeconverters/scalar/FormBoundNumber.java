@@ -2,13 +2,13 @@
  * Created on Jun 5, 2007
  * 	by the great Eclipse(c)
  */
-package rebound.spots.annotated.typeconversion.typeconverters.scalar;
+package rebound.spots.util.binding.annotated.typeconversion.typeconverters.scalar;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import rebound.spots.annotated.typeconversion.ConverterSpecifier;
+import rebound.spots.util.binding.annotated.typeconversion.ConverterSpecifier;
 
 /**
  * Specifier to {@link NumericFormTypeConverter}.<br>

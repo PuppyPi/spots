@@ -2,7 +2,7 @@
  * Created on Jun 2, 2007
  * 	by the great Eclipse(c)
  */
-package rebound.spots.annotated;
+package rebound.spots.util.binding.annotated;
 
 public class RequiredFieldNotFoundException
 extends Exception

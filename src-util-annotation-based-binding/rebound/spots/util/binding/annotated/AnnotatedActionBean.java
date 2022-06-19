@@ -2,7 +2,7 @@
  * Created on May 23, 2007
  * 	by the great Eclipse(c)
  */
-package rebound.spots.annotated;
+package rebound.spots.util.binding.annotated;
 
 import static java.util.Objects.*;
 import static rebound.text.StringUtilities.*;
@@ -19,13 +19,13 @@ import javax.annotation.Nullable;
 import javax.servlet.ServletException;
 import rebound.annotations.hints.ImplementationTransparency;
 import rebound.spots.ActionBean;
-import rebound.spots.annotated.typeconversion.ConverterSpecifier;
-import rebound.spots.annotated.typeconversion.TypeConversionException;
-import rebound.spots.annotated.typeconversion.TypeConverter;
-import rebound.spots.annotated.typeconversion.TypeConverterManager;
-import rebound.spots.annotated.typeconversion.TypeConverterNotFoundException;
-import rebound.spots.annotated.typeconversion.typeconverters.scalar.FormBound;
 import rebound.spots.util.AbstractActionBean;
+import rebound.spots.util.binding.annotated.typeconversion.ConverterSpecifier;
+import rebound.spots.util.binding.annotated.typeconversion.TypeConversionException;
+import rebound.spots.util.binding.annotated.typeconversion.TypeConverter;
+import rebound.spots.util.binding.annotated.typeconversion.TypeConverterManager;
+import rebound.spots.util.binding.annotated.typeconversion.TypeConverterNotFoundException;
+import rebound.spots.util.binding.annotated.typeconversion.typeconverters.scalar.FormBound;
 
 /**
  * This is the <code>AnnotatedActionBean</code>.<br>

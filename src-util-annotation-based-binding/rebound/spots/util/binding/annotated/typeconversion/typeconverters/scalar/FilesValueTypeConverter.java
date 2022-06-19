@@ -2,13 +2,13 @@
  * Created on Jan 30, 2008
  * 	by the wonderful Eclipse(c)
  */
-package rebound.spots.annotated.typeconversion.typeconverters.scalar;
+package rebound.spots.util.binding.annotated.typeconversion.typeconverters.scalar;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
 import rebound.spots.ActionBeanContext;
-import rebound.spots.annotated.typeconversion.TypeConverter;
 import rebound.spots.traditionaljee.util.fileupload.MultipartFilter;
+import rebound.spots.util.binding.annotated.typeconversion.TypeConverter;
 
 public class FilesValueTypeConverter
 implements TypeConverter<FormBoundFiles>

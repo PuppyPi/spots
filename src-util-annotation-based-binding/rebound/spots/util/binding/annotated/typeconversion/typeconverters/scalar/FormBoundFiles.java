@@ -2,15 +2,15 @@
  * Created on Jan 30, 2008
  * 	by the wonderful Eclipse(c)
  */
-package rebound.spots.annotated.typeconversion.typeconverters.scalar;
+package rebound.spots.util.binding.annotated.typeconversion.typeconverters.scalar;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import rebound.spots.annotated.typeconversion.ConverterSpecifier;
 import rebound.spots.traditionaljee.util.fileupload.AcceptFilter;
 import rebound.spots.traditionaljee.util.fileupload.MultipartFilter;
+import rebound.spots.util.binding.annotated.typeconversion.ConverterSpecifier;
 
 /**
  * Note: This must be used in conjunction with {@link MultipartFilter}.<br>

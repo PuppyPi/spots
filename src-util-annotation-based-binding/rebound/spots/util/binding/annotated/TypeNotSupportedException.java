@@ -2,9 +2,9 @@
  * Created on Jun 2, 2007
  * 	by the great Eclipse(c)
  */
-package rebound.spots.annotated;
+package rebound.spots.util.binding.annotated;
 
-import rebound.spots.annotated.typeconversion.ConverterSpecifier;
+import rebound.spots.util.binding.annotated.typeconversion.ConverterSpecifier;
 
 /**
  * You must have bound a field without a {@link ConverterSpecifier specifier} and used a type which is not supported (see {@link ConverterSpecifier}). For shame!<br>

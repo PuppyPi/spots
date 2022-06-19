@@ -2,7 +2,7 @@
  * Created on Jun 2, 2007
  * 	by the great Eclipse(c)
  */
-package rebound.spots.annotated.typeconversion;
+package rebound.spots.util.binding.annotated.typeconversion;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
