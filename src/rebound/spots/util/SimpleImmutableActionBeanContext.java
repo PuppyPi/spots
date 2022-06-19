@@ -35,4 +35,3 @@ implements ActionBeanContext
 		return servletContext;
 	}
 }
-//Beany>
