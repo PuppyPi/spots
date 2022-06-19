@@ -32,12 +32,12 @@ import rebound.spots.util.binding.annotated.typeconversion.typeconverters.scalar
  * If you make an {@link ActionBean} which extends this, code here will allow you to use annotations in your action bean class to make your life easier.<br>
  * <br>
  * There are two main blocks an action is split into here:<br>
- * {@link AnnotatedActionBean#doBinding() Binding} and {@link AnnotatedActionBean#doLogic() Logic}.<br>
+ * {@link BindingAnnotatedActionBean#doBinding() Binding} and {@link BindingAnnotatedActionBean#doLogic() Logic}.<br>
  * <br>
  * Logic is the simpler of the two. The only thing this class helps you with in that is determining events.<br>
  * An event handler method is annotated with one of two annotations: {@link HandlesEvent} or {@link DefaultHandler}.<br>
  * The mechanisms here make extensive use of overriding.
- * For example: If you only have one event, instead of only marking one method with {@link DefaultHandler}, just override {@link AnnotatedActionBean#doLogic() doLogic()}! (and don't call super())<br>
+ * For example: If you only have one event, instead of only marking one method with {@link DefaultHandler}, just override {@link BindingAnnotatedActionBean#doLogic() doLogic()}! (and don't call super())<br>
  * Note: Event handler methods must be public and have no args.<br>
  * <br>
  * Binding however, is more complex.<br>
@@ -57,12 +57,12 @@ import rebound.spots.util.binding.annotated.typeconversion.typeconverters.scalar
  * <br>
  * <br>
  * Binding error handling:<br>
- * When an error occurs during binding, it is {@link BindingException bundled} and sent to the {@link AnnotatedActionBean#handleBindingError(BindingException)} method.<br>
+ * When an error occurs during binding, it is {@link BindingException bundled} and sent to the {@link BindingAnnotatedActionBean#handleBindingError(BindingException)} method.<br>
  * The default behavior of this method (which is, unless you override it) is to scan the subclass's methods for the {@link HandlesBindingError} (or {@link HandlesBindingError}) annotations.<br>
  * It then determines the most specific handling method and invokes it (the method must take one {@link BindingException} argument).<br>
- * After that the {@link AnnotatedActionBean#doBinding()} method returns <code>false</code>, meaning the {@link AnnotatedActionBean#doLogic() logic} is not invoked.<br>
+ * After that the {@link BindingAnnotatedActionBean#doBinding()} method returns <code>false</code>, meaning the {@link BindingAnnotatedActionBean#doLogic() logic} is not invoked.<br>
  */
-public abstract class AnnotatedActionBean
+public abstract class BindingAnnotatedActionBean
 extends AbstractActionBean
 {
 	public void doAction() throws ServletException, IOException

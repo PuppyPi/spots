@@ -14,7 +14,7 @@ import rebound.spots.util.binding.annotated.BindingException.Type;
 
 
 /**
- * This filtering mechanism allows for the spreading out of error handler logic into multiple methods (as opposed to one {@link AnnotatedActionBean#handleBindingError(BindingException)}.<br>
+ * This filtering mechanism allows for the spreading out of error handler logic into multiple methods (as opposed to one {@link BindingAnnotatedActionBean#handleBindingError(BindingException)}.<br>
  * The target method must have a signature of: <code>public void <i>handle</i>({@link BindingException})</code><br>
  * Methods may have {@link HandlesBindingError more than one} of this annotation, and methods can have these overlapping.<br>
  * If there are overlapping methods, the following order of precedence is used to determine which is called (because only one is called).<br>

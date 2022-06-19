@@ -4,9 +4,6 @@
  */
 package rebound.spots.util;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import rebound.annotations.hints.IntendedToBeSubclassedImplementedOrOverriddenByApiUser;
 import rebound.spots.ActionBean;
 import rebound.spots.ActionBeanContext;
@@ -69,22 +66,6 @@ implements ActionBean
 	public void log(String msg, Throwable t)
 	{
 		getContext().getServletContext().log(getClass().getSimpleName()+": "+msg, t);
-	}
-	
-	
-	public HttpServletRequest getRequest()
-	{
-		return getContext().getRequest();
-	}
-	
-	public HttpSession getSession()
-	{
-		return getContext().getRequest().getSession();
-	}
-	
-	public HttpServletResponse getResponse()
-	{
-		return getContext().getResponse();
 	}
 	//Utils>
 }

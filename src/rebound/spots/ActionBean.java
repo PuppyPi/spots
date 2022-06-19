@@ -6,6 +6,9 @@ package rebound.spots;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import rebound.annotations.hints.IntendedToNOTBeSubclassedImplementedOrOverriddenByApiUser;
 
 public interface ActionBean
 {
@@ -14,4 +17,16 @@ public interface ActionBean
 	public ActionBeanContext getContext();
 	
 	public void setContext(ActionBeanContext context);
+	
+	
+	
+	public default HttpServletRequest getRequest()
+	{
+		return getContext().getRequest();
+	}
+	
+	public default HttpServletResponse getResponse()
+	{
+		return getContext().getResponse();
+	}
 }

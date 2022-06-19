@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import rebound.simplejee.AbstractHttpServlet;
 import rebound.simplejee.SimpleJEEUtilities;
 import rebound.spots.util.SimpleImmutableActionBeanContext;
+import rebound.spots.util.SpotsDispatcherForBeansWithViewResourcePath;
 import rebound.util.collections.PairOrdered;
 
 /**
@@ -31,6 +32,9 @@ import rebound.util.collections.PairOrdered;
 public class SpotsDispatcher
 {
 	/**
+	 * This method is actually rarely used and serves as just an example for all but the simplest of webservers/webapps.
+	 * See {@link SpotsDispatcherForBeansWithViewResourcePath} for a typical web server (that uses some kind of pathname-based "view" resources like .jsp pages or static files (eg, .js/.css) )
+	 * 
 	 * You might want to not just pass {@link #getActionBeanClass(String, Class)} or similar into here in your {@link AbstractHttpServlet#serviceHttp(HttpServletRequest, HttpServletResponse)} implementation, but consider making your own getActionBeanClass(String) (especially if your URLs can have database-based non-static parts!) so that other things in the system can check URLs (really URI path parts) to see if they're servable by your webapp!  (eg, when selecting a name for the dynamic user-generated part to tell if it overlaps with a page! like if they try making their username be "about" or "robots.txt" XD )
 	 * Or better, usually, write a method <code>public static {@link PairOrdered}<Class, String> getActionBeanClassAndViewResourcePathname(String requestURIPath)</code> or similar, which also provides the default resource pathname that *would* be used (whether it is or not) by the Action Bean for {@link SimpleJEEUtilities#serveStatically(ServletContext, HttpServletRequest, HttpServletResponse, String)} or {@link SimpleJEEUtilities#serveJSP(ServletContext, HttpServletRequest, HttpServletResponse, String)} :>
 	 * 
@@ -40,7 +44,7 @@ public class SpotsDispatcher
 	 * @param actionBeanClass  usually from {@link #getActionBeanClass(String, Class)} or similar (which, itself, pulls from {@link #getActionBeanClassName(String, String, String)} or similar)
 	 * @param verbose  log even non error hits to {@link ServletContext#log(String)} ?
 	 */
-	public static void dispatch(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Class actionBeanClass, boolean verbose) throws ServletException, IOException
+	public static void dispatch(ServletContext servletContext, HttpServletRequest request, HttpServletResponse response, Class<? extends ActionBean> actionBeanClass, boolean verbose) throws ServletException, IOException
 	{
 		//Try to instantiate and run an actionbean
 		//Don't pay any attention to the HTTP METHOD, the beans take care of that.
@@ -106,14 +110,14 @@ public class SpotsDispatcher
 	 * (but if you were actually using a language other than English you probably wouldn't make "Action" be the suffix XD )
 	 * 
 	 * @param requestURIPath  the path like {@link HttpServletRequest#getRequestURI()} would return (ie, starting with a slash and without a query string or anchor fragment!)
-	 * @param actionBeanPrefix  eg, "com.example.webui.actions."
-	 * @param actionBeanSuffix  eg, "Action"
+	 * @param actionBeansPrefix  eg, "com.example.webui.actions."
+	 * @param actionBeansSuffix  eg, "Action"
 	 * @return null on syntax error (eg, doesn't start with "/")
 	 */
-	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeanPrefix, String actionBeanSuffix)
+	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix)
 	{
 		//We use Unmodified by default to be consistent with most of the web, wherein URL/URI paths are totally case-sensitive
-		return getActionBeanClassName(requestURIPath, actionBeanPrefix, actionBeanSuffix, ClassNameCapitalization.Unmodified, '_', '_', '_');
+		return getActionBeanClassName(requestURIPath, actionBeansPrefix, actionBeansSuffix, ClassNameCapitalization.Unmodified, '_', '_', '_');
 	}
 	
 	
@@ -124,7 +128,7 @@ public class SpotsDispatcher
 		LowercaseAllAndUppercaseFirstLetterOfSimpleNamePart,
 	}
 	
-	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeanPrefix, String actionBeanSuffix, ClassNameCapitalization capitalizationPreference, char charForDots, char charForDashes, char charForSpaces)
+	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix, ClassNameCapitalization capitalizationPreference, char charForDots, char charForDashes, char charForSpaces)
 	{
 		if (requestURIPath.isEmpty())
 			return null;
@@ -157,7 +161,7 @@ public class SpotsDispatcher
 		
 		
 		//Attach the prefix+stem+suffix
-		String actionBeanClassName = actionBeanPrefix + actionBeanStem + actionBeanSuffix;
+		String actionBeanClassName = actionBeansPrefix + actionBeanStem + actionBeansSuffix;
 		
 		
 		//Capitalize the classname (regardless of whether it's in the actionBeanStem or actionBeanSuffix!
@@ -235,7 +239,7 @@ public class SpotsDispatcher
 	 * Instantiate an {@link ActionBean} and invoke {@link ActionBean#setContext(ActionBeanContext)} on it with a newly created {@link ActionBeanContext}.<br>
 	 * @return The action bean all initted and its context set, or <code>null</code> if there was an error instantiating it (which has been {@link ServletContext#log(String, Throwable) logged}.
 	 */
-	public static @Nullable ActionBean newActionBean(Class clazz, ServletContext servletContext, HttpServletRequest request, HttpServletResponse response)
+	public static @Nullable <T extends ActionBean> T newActionBean(Class<T> clazz, ServletContext servletContext, HttpServletRequest request, HttpServletResponse response)
 	{
 		if (clazz == null)
 		{
@@ -245,34 +249,28 @@ public class SpotsDispatcher
 		
 		try
 		{
-			ActionBean bean = null;
-			{
-				Object o = clazz.newInstance();
-				
-				if (o instanceof ActionBean)
-				{
-					bean = (ActionBean)o;
-					
-					bean.setContext(new SimpleImmutableActionBeanContext(request, response, servletContext));
-				}
-				else
-				{
-					servletContext.log("Requested action bean "+clazz+" is not an ActionBean!");
-				}
-			}
+			T bean = clazz.newInstance();
 			
-			return bean;
+			if (bean instanceof ActionBean)
+			{
+				bean.setContext(new SimpleImmutableActionBeanContext(request, response, servletContext));
+				return bean;
+			}
+			else
+			{
+				servletContext.log("Requested action bean "+clazz+" is not an ActionBean!");
+				return null;
+			}
 		}
-		
 		catch (InstantiationException exc)
 		{
 			servletContext.log("Error instantiating action bean "+clazz+":", exc);
+			return null;
 		}
 		catch (IllegalAccessException exc)
 		{
 			servletContext.log("Error instantiating action bean " + clazz + ":", exc);
+			return null;
 		}
-		
-		return null;
 	}
 }
