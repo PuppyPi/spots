@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * Send the final flush and close with {@link #reallyClose()}!
  * And do an actual flush with {@link #reallyFlush()}
  */
-public class FlushPendingServletResponseDecorator
+public class FlushPendingHttpServletResponseDecorator
 implements HttpServletResponse
 {
 	protected HttpServletResponse underlying;
@@ -22,7 +22,7 @@ implements HttpServletResponse
 	protected PrintWriter underlyingWOut;
 	protected boolean pendingClose = false;
 	
-	public FlushPendingServletResponseDecorator(HttpServletResponse underlying)
+	public FlushPendingHttpServletResponseDecorator(HttpServletResponse underlying)
 	{
 		this.underlying = underlying;
 	}
