@@ -3,9 +3,15 @@ package rebound.spots.util;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import rebound.annotations.hints.ImplementationTransparency;
+import rebound.simplejee.FlushPendingHttpServletResponseDecorator;
 import rebound.simplejee.SimpleJEEUtilities;
 import rebound.spots.ActionBean;
+import rebound.spots.ActionBeanContext;
 
+/**
+ * This is guaranteed to use {@link #getRequest()} / {@link #getResponse()} not {@link #getContext()}.{@link ActionBeanContext#getRequest() getRequest()} / {@link #getContext()}.{@link ActionBeanContext#getResponse() getResponse()},
+ * in case you want to override them to use wrappers (eg, {@link FlushPendingHttpServletResponseDecorator}).
+ */
 public interface DefaultSimpleJEEActionBean
 extends ActionBean
 {
