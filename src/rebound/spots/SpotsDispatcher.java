@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import rebound.simplejee.AbstractHttpServlet;
 import rebound.simplejee.SimpleJEEUtilities;
 import rebound.spots.util.SimpleImmutableActionBeanContext;
-import rebound.spots.util.SpotsDispatcherForBeansWithViewResourcePath;
 import rebound.util.collections.PairOrdered;
 import rebound.util.functional.FunctionInterfaces.UnaryProcedure;
 
