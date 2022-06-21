@@ -6,7 +6,6 @@ package rebound.spots.traditionaljee.util;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +17,8 @@ extends AbstractHTTPFilter
 	@Override
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
-		chain.doFilter(request, new ReplacementErrorResolutionResponseWrapper(request, response, getServletContext(), this::sendError));
+		chain.doFilter(request, new ReplacementErrorResolutionResponseWrapper(response, (int code, String message) -> this.sendError(request, response, code, message)));
 	}
 	
-	public abstract boolean sendError(HttpServletRequest request, HttpServletResponse response, ServletContext context, int code, String message) throws IOException;
+	public abstract boolean sendError(HttpServletRequest request, HttpServletResponse response, int code, String message) throws IOException;
 }
