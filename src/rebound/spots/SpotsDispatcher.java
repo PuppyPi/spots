@@ -78,7 +78,7 @@ public class SpotsDispatcher
 	/**
 	 * The Java Fully-Qualified Class Name of the action bean:
 	 * 
-	 * eg, (if prefix = "com.example.webui.actions." and suffix = "Action"),
+	 * eg, (if prefix = "com.example.webui.actions." and suffix = "Action" (for demonstration. probably you don't want a suffix but who knows!) ),
 	 * 
 	 * "/" → "com.example.webui.actions.Action"
 	 * "/index" → "com.example.webui.actions.indexAction"
@@ -117,27 +117,16 @@ public class SpotsDispatcher
 	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix)
 	{
 		//We use Unmodified by default to be consistent with most of the web, wherein URL/URI paths are totally case-sensitive
-		return getActionBeanClassName(requestURIPath, actionBeansPrefix, actionBeansSuffix, ClassNameCapitalization.Unmodified, '_', '_', '_');
+		return getActionBeanClassName(requestURIPath, actionBeansPrefix, actionBeansSuffix, '_', '_', '_');
 	}
 	
 	
-	public static enum ClassNameCapitalization
+	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix, char charForDots, char charForDashes, char charForSpaces)
 	{
-		Unmodified,  //introduces no non-injectivities
-		UppercaseFirstLetterOfSimpleNamePart,
-		LowercaseAllAndUppercaseFirstLetterOfSimpleNamePart,
-	}
-	
-	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix, ClassNameCapitalization capitalizationPreference, char charForDots, char charForDashes, char charForSpaces)
-	{
-		if (requestURIPath.isEmpty())
+		if (!requestURIPath.startsWith("/"))
 			return null;
 		
-		if (requestURIPath.charAt(0) != '/')
-			return null;
-		
-		//Trim trailing slash
-		requestURIPath = rtrimstr(requestURIPath, "/");
+		requestURIPath = trimstr(requestURIPath, "/");  //Trim the initial slash and the optional trailing slash
 		
 		//The stem section is between the prefix and the suffix
 		String actionBeanStem;
@@ -155,7 +144,10 @@ public class SpotsDispatcher
 				
 				//NOTE that dots are converted *after* url descaping!!
 				//This way, if %2E appears, it won't allow an attacker to get to a (sub)package you might not expect them to!
+				
+				pathElements[i] = pathElement;
 			}
+			
 			actionBeanStem = joinStrings('.', pathElements);  //Convert to a package
 		}
 		
@@ -164,27 +156,8 @@ public class SpotsDispatcher
 		String actionBeanClassName = actionBeansPrefix + actionBeanStem + actionBeansSuffix;
 		
 		
-		//Capitalize the classname (regardless of whether it's in the actionBeanStem or actionBeanSuffix!
-		{
-			int lastDot = actionBeanClassName.lastIndexOf('.');
-			int capsCharIndex = 0;
-			
-			if (lastDot != -1)
-			{
-				capsCharIndex = lastDot + 1;
-				if (capsCharIndex >= actionBeanClassName.length())
-					capsCharIndex = lastDot; //Don't blame me for there not being a classname!
-				
-				actionBeanClassName =
-				actionBeanClassName.substring(0, capsCharIndex) +
-				Character.toUpperCase(actionBeanClassName.charAt(capsCharIndex)) +
-				actionBeanClassName.substring(capsCharIndex+1);
-			}
-		}
-		
 		return actionBeanClassName;
 	}
-	
 	
 	
 	
