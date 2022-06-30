@@ -209,7 +209,7 @@ public class SpotsDispatcher
 	
 	
 	/**
-	 * Instantiate an {@link ActionBean} and invoke {@link ActionBean#setContext(ActionBeanContext)} on it with a newly created {@link ActionBeanContext}.<br>
+	 * Instantiate an {@link ActionBean} and invoke {@link ActionBean#setActionBeanContext(ActionBeanContext)} on it with a newly created {@link ActionBeanContext}.<br>
 	 * @return The action bean all initted and its context set, or <code>null</code> if there was an error instantiating it (which has been {@link ServletContext#log(String, Throwable) logged}.
 	 */
 	public static @Nullable <T extends ActionBean> T newActionBean(Class<T> clazz, ServletContext servletContext, HttpServletRequest request, HttpServletResponse response)
@@ -226,7 +226,7 @@ public class SpotsDispatcher
 			
 			if (bean instanceof ActionBean)
 			{
-				bean.setContext(new SimpleImmutableActionBeanContext(request, response, servletContext));
+				bean.setActionBeanContext(new SimpleImmutableActionBeanContext(request, response, servletContext));
 				return bean;
 			}
 			else

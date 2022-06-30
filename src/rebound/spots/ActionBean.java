@@ -13,19 +13,19 @@ public interface ActionBean
 {
 	public void doAction() throws ServletException, IOException;
 	
-	public ActionBeanContext getContext();
+	public ActionBeanContext getActionBeanContext();
 	
-	public void setContext(ActionBeanContext context);
+	public void setActionBeanContext(ActionBeanContext context);
 	
 	
 	
 	public default HttpServletRequest getRequest()
 	{
-		return getContext().getRequest();
+		return getActionBeanContext().getRequest();
 	}
 	
 	public default HttpServletResponse getResponse()
 	{
-		return getContext().getResponse();
+		return getActionBeanContext().getResponse();
 	}
 }

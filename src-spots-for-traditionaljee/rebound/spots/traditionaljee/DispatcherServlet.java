@@ -134,7 +134,7 @@ extends HttpServlet
 	
 	//<Beany
 	/**
-	 * Instantiate an {@link ActionBean} and invoke {@link ActionBean#setContext(ActionBeanContext)} on it with a newly created {@link ActionBeanContext}.<br>
+	 * Instantiate an {@link ActionBean} and invoke {@link ActionBean#setActionBeanContext(ActionBeanContext)} on it with a newly created {@link ActionBeanContext}.<br>
 	 * @return The action bean all initted and its context set, or <code>null</code> if there was an error instantiating it.
 	 */
 	public ActionBean getActionBean(Class clazz, HttpServletRequest request, HttpServletResponse response, ActionBeanContext context)
@@ -155,7 +155,7 @@ extends HttpServlet
 				{
 					bean = (ActionBean)o;
 					
-					bean.setContext(context);
+					bean.setActionBeanContext(context);
 				}
 				else
 				{

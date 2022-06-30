@@ -109,7 +109,7 @@ extends AbstractActionBean
 			{
 				try
 				{
-					converted = TypeConverterManager.convert(getContext(), binding.getDestination(), binding.getSpecifier(), binding.getEnvironment());
+					converted = TypeConverterManager.convert(getActionBeanContext(), binding.getDestination(), binding.getSpecifier(), binding.getEnvironment());
 				}
 				catch (TypeConversionException exc)
 				{

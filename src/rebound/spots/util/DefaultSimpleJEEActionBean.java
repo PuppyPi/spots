@@ -9,7 +9,7 @@ import rebound.spots.ActionBean;
 import rebound.spots.ActionBeanContext;
 
 /**
- * This is guaranteed to use {@link #getRequest()} / {@link #getResponse()} not {@link #getContext()}.{@link ActionBeanContext#getRequest() getRequest()} / {@link #getContext()}.{@link ActionBeanContext#getResponse() getResponse()},
+ * This is guaranteed to use {@link #getRequest()} / {@link #getResponse()} not {@link #getActionBeanContext()}.{@link ActionBeanContext#getRequest() getRequest()} / {@link #getActionBeanContext()}.{@link ActionBeanContext#getResponse() getResponse()},
  * in case you want to override them to use wrappers (eg, {@link FlushPendingHttpServletResponseDecorator}).
  */
 public interface DefaultSimpleJEEActionBean
@@ -23,7 +23,7 @@ extends ActionBean
 	@ImplementationTransparency  //Java doesn't allow non-public methods in interfaces and doesn't allow multiple-inheritance in non-interfaces X'D
 	public default void serveStaticView(String viewResourcePath) throws ServletException, IOException
 	{
-		SimpleJEEUtilities.serveStatically(getContext().getServletContext(), getRequest(), getResponse(), viewResourcePath);
+		SimpleJEEUtilities.serveStatically(getActionBeanContext().getServletContext(), getRequest(), getResponse(), viewResourcePath);
 	}
 	
 	
@@ -46,6 +46,6 @@ extends ActionBean
 	@ImplementationTransparency  //Java doesn't allow non-public methods in interfaces and doesn't allow multiple-inheritance in non-interfaces X'D
 	public default void serveJSPView(String viewResourcePath) throws ServletException, IOException
 	{
-		SimpleJEEUtilities.serveJSP(getContext().getServletContext(), getRequest(), getResponse(), viewResourcePath);
+		SimpleJEEUtilities.serveJSP(getActionBeanContext().getServletContext(), getRequest(), getResponse(), viewResourcePath);
 	}
 }

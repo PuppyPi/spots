@@ -14,12 +14,12 @@ implements ActionBean
 	protected ActionBeanContext context;
 	
 	
-	public void setContext(ActionBeanContext context)
+	public void setActionBeanContext(ActionBeanContext context)
 	{
 		this.context = context;
 	}
 	
-	public ActionBeanContext getContext()
+	public ActionBeanContext getActionBeanContext()
 	{
 		return this.context;
 	}
@@ -52,7 +52,7 @@ implements ActionBean
 	public void log(String msg, boolean debug)
 	{
 		if (!debug || isDebug())
-			getContext().getServletContext().log(getClass().getSimpleName()+": "+msg);
+			getActionBeanContext().getServletContext().log(getClass().getSimpleName()+": "+msg);
 	}
 	
 	public void logBenchmark(long start, String desc)
@@ -65,7 +65,7 @@ implements ActionBean
 	
 	public void log(String msg, Throwable t)
 	{
-		getContext().getServletContext().log(getClass().getSimpleName()+": "+msg, t);
+		getActionBeanContext().getServletContext().log(getClass().getSimpleName()+": "+msg, t);
 	}
 	//Utils>
 }
