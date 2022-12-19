@@ -27,6 +27,8 @@ import rebound.spots.util.binding.annotated.typeconversion.TypeConverterManager;
 import rebound.spots.util.binding.annotated.typeconversion.TypeConverterNotFoundException;
 import rebound.spots.util.binding.annotated.typeconversion.typeconverters.scalar.FormBound;
 
+//Todo throw an exception if there is a @FormBound or similar but no public way of setting it!! (eg, a public setter!)
+
 /**
  * This is the <code>AnnotatedActionBean</code>.<br>
  * If you make an {@link ActionBean} which extends this, code here will allow you to use annotations in your action bean class to make your life easier.<br>
