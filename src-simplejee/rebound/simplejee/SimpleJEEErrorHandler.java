@@ -2,7 +2,6 @@ package rebound.simplejee;
 
 import java.io.IOException;
 import javax.annotation.Nullable;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 
 public interface SimpleJEEErrorHandler
