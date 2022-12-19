@@ -10,9 +10,7 @@ public interface ActionBeanWithViewResourcePath
 extends ActionBean
 {
 	/**
-	 * @param path  eg, "/styles/main.css" or "/index.jsp" or "/forum/threads.jsp" or "/errors/notfound.jsp" or etc. :3
+	 * @return eg, "/styles/main.css" or "/index.jsp" or "/forum/threads.jsp" or "/errors/notfound.jsp" or etc. :3
 	 */
-	public void setViewResourcePath(String path);
-	
 	public String getViewResourcePath();
 }

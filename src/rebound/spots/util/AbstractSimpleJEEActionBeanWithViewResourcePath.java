@@ -6,9 +6,7 @@ implements ActionBeanWithViewResourcePath, DefaultSimpleJEEActionBeanWithViewRes
 {
 	protected String viewResourcePath;
 	
-	
-	@Override
-	public void setViewResourcePath(String path)
+	protected void setViewResourcePath(String path)
 	{
 		this.viewResourcePath = path;
 	}
