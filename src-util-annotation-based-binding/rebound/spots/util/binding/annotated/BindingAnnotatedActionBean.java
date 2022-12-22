@@ -592,7 +592,7 @@ extends AbstractActionBean
 	
 	
 	//<Cache
-	protected static HashMap<Class, CachedClass> map = new HashMap<Class, CachedClass>(32, 0.9f);
+	protected static HashMap<Class, CachedClass> map = new HashMap<Class, CachedClass>(32, 0.9f);  //TODO No staticcccccccccs!
 	
 	public static class CachedClass
 	{
