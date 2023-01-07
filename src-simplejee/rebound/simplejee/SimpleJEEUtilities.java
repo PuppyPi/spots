@@ -29,7 +29,7 @@ public class SimpleJEEUtilities
 	
 	public static void serveStatically(ServletContext context, HttpServletRequest request, HttpServletResponse response, String relativePathInWebappToStaticFileStartingWithSlash, String staticServletName) throws ServletException, IOException
 	{
-		if (FSUtilities.doesPathContainStandardUpwardTraversalMetaElement(relativePathInWebappToStaticFileStartingWithSlash))
+		if (FSUtilities.containsAnyAscendingRelativePathElementsForwardSlashed(relativePathInWebappToStaticFileStartingWithSlash))
 			throw new SecurityException("Ascending relative path given in DEFAULT-servlet (static pages) forward URI: \""+relativePathInWebappToStaticFileStartingWithSlash+"\"");
 		
 		HttpServletRequestWithNewURIDecorator newRequest = new HttpServletRequestWithNewURIDecorator(request, relativePathInWebappToStaticFileStartingWithSlash);
@@ -52,7 +52,7 @@ public class SimpleJEEUtilities
 	
 	public static void serveJSP(ServletContext context, HttpServletRequest request, HttpServletResponse response, String relativePathInWebappToJSPFileStartingWithSlash, String jspServletName) throws ServletException, IOException
 	{
-		if (FSUtilities.doesPathContainStandardUpwardTraversalMetaElement(relativePathInWebappToJSPFileStartingWithSlash))
+		if (FSUtilities.containsAnyAscendingRelativePathElementsForwardSlashed(relativePathInWebappToJSPFileStartingWithSlash))
 			throw new SecurityException("Ascending relative path given in JSP forward URI: \""+relativePathInWebappToJSPFileStartingWithSlash+"\"");
 		
 		HttpServletRequestWithNewURIDecorator newRequest = new HttpServletRequestWithNewURIDecorator(request, relativePathInWebappToJSPFileStartingWithSlash);
