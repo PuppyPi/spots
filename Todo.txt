@@ -1,1 +1,3 @@
+!• Complain instead of silently do nothing when a FormBound thing is missing required accessors!! D:
+
 • Make the String value() parameter in the FormBoundXyz things default to "" and let the code use the field name when it's that!!
