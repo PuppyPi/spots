@@ -131,7 +131,7 @@ public class SpotsDispatcher
 		//The stem section is between the prefix and the suffix
 		String actionBeanStem;
 		{
-			//It has the uri-dots (.css, .html, ...) replaced with internal-class dollar signs and its uri-slashes replaced with package-dots
+			//It has the uri-dots (.css, .html, ...) replaced with underscores or something and its uri-slashes replaced with package-dots
 			String[] pathElements = split(requestURIPath, '/');
 			
 			int n = pathElements.length;
