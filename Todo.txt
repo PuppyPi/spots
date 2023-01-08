@@ -1,3 +1,4 @@
 !• Complain instead of silently do nothing when a FormBound thing is missing required accessors!! D:
 
 • Make the String value() parameter in the FormBoundXyz things default to "" and let the code use the field name when it's that!!
+• Provide the entire ActionBean not just its context to the Type Converter Specifiers (FormBoundXyz) so that site-specific custom ones can access the site-specific context, like the database connection! X3
