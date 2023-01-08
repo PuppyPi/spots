@@ -117,7 +117,7 @@ public class SpotsDispatcher
 	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix)
 	{
 		//We use Unmodified by default to be consistent with most of the web, wherein URL/URI paths are totally case-sensitive
-		return getActionBeanClassName(requestURIPath, actionBeansPrefix, actionBeansSuffix, '_', '_');
+		return getActionBeanClassName(requestURIPath, actionBeansPrefix, actionBeansSuffix, '_', null, null);  //Let the default way be bijective for maximum reliability/security where dots are legal in URLs and not Java FQN's, and underscores are legal in Java FQN's and not in our URLs, so that we can bijectively map them to each other :33
 	}
 	
 	
@@ -125,7 +125,7 @@ public class SpotsDispatcher
 	 * @param charForDots  if null, then consider dots to be unmappable (and return null if any are present)
 	 * @param charForDashes  if null, then consider dots to be unmappable (and return null if any are present)
 	 */
-	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix, Character charForDots, Character charForDashes)
+	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix, Character charForDots, Character charForDashes, Character charForUnderscores)
 	{
 		if (!requestURIPath.startsWith("/"))
 			return null;
@@ -159,6 +159,11 @@ public class SpotsDispatcher
 				if (charForDashes != null)
 					pathElement = pathElement.replace('-', charForDashes);
 				else if (contains(pathElement, '-'))
+					return null;
+				
+				if (charForUnderscores != null)
+					pathElement = pathElement.replace('_', charForUnderscores);
+				else if (contains(pathElement, '_'))
 					return null;
 				
 				pathElements[i] = pathElement;
