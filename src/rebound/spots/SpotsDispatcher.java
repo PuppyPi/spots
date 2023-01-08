@@ -117,18 +117,21 @@ public class SpotsDispatcher
 	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix)
 	{
 		//We use Unmodified by default to be consistent with most of the web, wherein URL/URI paths are totally case-sensitive
-		return getActionBeanClassName(requestURIPath, actionBeansPrefix, actionBeansSuffix, '_', null, null);  //Let the default way be bijective for maximum reliability/security where dots are legal in URLs and not Java FQN's, and underscores are legal in Java FQN's and not in our URLs, so that we can bijectively map them to each other :33
+		return getActionBeanClassName(requestURIPath, actionBeansPrefix, actionBeansSuffix,   '_', null,  '.', '_');  //Let the default way be bijective for maximum reliability/security where dots are legal in URLs and not Java FQN's, and underscores are legal in Java FQN's and not in our URLs, so that we can bijectively map them to each other :33      //Note that it must come in this order!!  Otherwise the dot will be converted to underscore and then underscore detected as if it was in the original string!!
 	}
 	
 	
 	/**
-	 * @param charForDots  if null, then consider dots to be unmappable (and return null if any are present)
-	 * @param charForDashes  if null, then consider dots to be unmappable (and return null if any are present)
+	 * @param replacementChars  pairs of non-null chars with nullable {@link Character}s to replace them with *in the order given*, which, if the replacement is null, consider the target char to be unmappable (and make the whole method return null if there are any present)
 	 */
-	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix, Character charForDots, Character charForDashes, Character charForUnderscores)
+	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix, Character... replacementChars)
 	{
 		if (!requestURIPath.startsWith("/"))
 			return null;
+		
+		if ((replacementChars.length % 2) != 0)
+			throw new IllegalArgumentException("We expected these to come in pairs!  Eg, {target0, replacement0,  target1, replacement1,  target2, replacement2,  ...}");
+		
 		
 		requestURIPath = trimstr(requestURIPath, "/");  //Trim the initial slash and the optional trailing slash
 		
@@ -151,20 +154,16 @@ public class SpotsDispatcher
 				//NOTE that dots are converted *after* url descaping!!
 				//This way, if %2E appears, it won't allow an attacker to get to a (sub)package you might not expect them to!
 				
-				if (charForDots != null)
-					pathElement = pathElement.replace('.', charForDots);
-				else if (contains(pathElement, '.'))
-					return null;
-				
-				if (charForDashes != null)
-					pathElement = pathElement.replace('-', charForDashes);
-				else if (contains(pathElement, '-'))
-					return null;
-				
-				if (charForUnderscores != null)
-					pathElement = pathElement.replace('_', charForUnderscores);
-				else if (contains(pathElement, '_'))
-					return null;
+				for (int r = 0; r < replacementChars.length; r += 2)
+				{
+					char target = replacementChars[r+0];
+					@Nullable Character replacement = replacementChars[r+1];
+					
+					if (replacement != null)
+						pathElement = pathElement.replace(target, replacement);
+					else if (contains(pathElement, target))
+						return null;
+				}
 				
 				pathElements[i] = pathElement;
 			}
