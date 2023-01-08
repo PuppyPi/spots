@@ -117,11 +117,15 @@ public class SpotsDispatcher
 	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix)
 	{
 		//We use Unmodified by default to be consistent with most of the web, wherein URL/URI paths are totally case-sensitive
-		return getActionBeanClassName(requestURIPath, actionBeansPrefix, actionBeansSuffix, '_', '_', '_');
+		return getActionBeanClassName(requestURIPath, actionBeansPrefix, actionBeansSuffix, '_', '_');
 	}
 	
 	
-	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix, char charForDots, char charForDashes, char charForSpaces)
+	/**
+	 * @param charForDots  if null, then consider dots to be unmappable (and return null if any are present)
+	 * @param charForDashes  if null, then consider dots to be unmappable (and return null if any are present)
+	 */
+	public static @Nullable String getActionBeanClassName(@Nonnull String requestURIPath, String actionBeansPrefix, String actionBeansSuffix, Character charForDots, Character charForDashes)
 	{
 		if (!requestURIPath.startsWith("/"))
 			return null;
@@ -139,11 +143,23 @@ public class SpotsDispatcher
 			for (int i = 0; i < n; i++)
 			{
 				String pathElement = pathElements[i];
+				
 				pathElement = urldescape(pathElement);
-				pathElement = pathElement.replace('.', charForDots).replace('-', charForDashes).replace(' ', charForSpaces);  //Some standard-to-Spots conversions for characters legal in URLs, but illegal in Java identifiers
+				
+				//Some standard-to-Spots conversions for common characters that are legal in URLs, but illegal in Java identifiers
 				
 				//NOTE that dots are converted *after* url descaping!!
 				//This way, if %2E appears, it won't allow an attacker to get to a (sub)package you might not expect them to!
+				
+				if (charForDots != null)
+					pathElement = pathElement.replace('.', charForDots);
+				else if (contains(pathElement, '.'))
+					return null;
+				
+				if (charForDashes != null)
+					pathElement = pathElement.replace('-', charForDashes);
+				else if (contains(pathElement, '-'))
+					return null;
 				
 				pathElements[i] = pathElement;
 			}
