@@ -50,12 +50,12 @@ public class FileValue<D>
 		this.filehandle = filehandle;
 	}
 
-	public long getLastModified()
+	public Long getLastModified()
 	{
 		return lastModified;
 	}
 
-	public void setLastModified(long lastModified)
+	public void setLastModified(Long lastModified)
 	{
 		this.lastModified = lastModified;
 	}
