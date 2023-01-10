@@ -4,7 +4,7 @@
  */
 package rebound.spots.traditionaljee.util.fileupload;
 
-//TODO LAST MODIFIED!!
+//TODO SET LAST MODIFIED!!
 
 /**
  * Represents a single file in the value of a "file" type HTML Form Field (because the user could have selected multiple files).<br>
@@ -14,6 +14,7 @@ public class FileValue<D>
 {
 	protected String filename, contentType;
 	protected D filehandle;
+	protected long lastModified;  //like System.currentTimeMillis()
 	
 	
 	public String getFilename()
@@ -44,5 +45,15 @@ public class FileValue<D>
 	public void setFilehandle(D filehandle)
 	{
 		this.filehandle = filehandle;
+	}
+
+	public long getLastModified()
+	{
+		return lastModified;
+	}
+
+	public void setLastModified(long lastModified)
+	{
+		this.lastModified = lastModified;
 	}
 }
