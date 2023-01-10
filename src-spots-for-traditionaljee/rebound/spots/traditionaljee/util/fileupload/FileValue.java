@@ -4,6 +4,9 @@
  */
 package rebound.spots.traditionaljee.util.fileupload;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 //TODO SET LAST MODIFIED!!
 
 /**
@@ -12,9 +15,9 @@ package rebound.spots.traditionaljee.util.fileupload;
  */
 public class FileValue<D>
 {
-	protected String filename, contentType;
-	protected D filehandle;
-	protected long lastModified;  //like System.currentTimeMillis()
+	protected @Nullable String filename, contentType;
+	protected @Nonnull D filehandle;
+	protected @Nullable Long lastModified;  //like System.currentTimeMillis()
 	
 	
 	public String getFilename()
