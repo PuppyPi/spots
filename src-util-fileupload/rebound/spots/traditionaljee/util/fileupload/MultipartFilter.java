@@ -15,10 +15,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import rebound.io.util.TextIOUtilities;
+import rebound.server.fileupload.fromothers.MimeTypeParameterList;
+import rebound.server.fileupload.fromothers.MultipartStream;
 import rebound.spots.traditionaljee.util.AbstractHTTPFilter;
 import rebound.spots.traditionaljee.util.MutableParameterServletRequest;
-import rebound.spots.traditionaljee.util.fileupload.fromothers.MimeTypeParameterList;
-import rebound.spots.traditionaljee.util.fileupload.fromothers.MultipartStream;
 import rebound.util.MIMEHeaders;
 import rebound.util.MIMEHeaders.Header;
 
