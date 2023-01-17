@@ -282,6 +282,7 @@ public class MultipartHandlingCore
 										catch (MimeTypeParseException exc)
 										{
 											kill400.run();
+											return null;
 										}
 									}
 									
