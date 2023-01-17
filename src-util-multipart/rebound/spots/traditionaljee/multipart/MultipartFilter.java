@@ -54,10 +54,13 @@ extends AbstractHTTPFilter
 			Datastore<D> datastore = getDatastore(request, response);
 			
 			
-			Map<String, List<Either<String, FileValue<D>>>> r = MultipartHandlingCore.handle(request, acceptFilter, datastore, () -> this.kill400(request, response));
+			Map<String, List<Either<String, FileValue<D>>>> r = MultipartHandlingCore.handle(request, acceptFilter, datastore);
 			
-			if (r == null)  //error
+			if (r == null)  //Client error!
+			{
+				kill400(request, response);
 				return;
+			}
 			else
 			{
 				for (Entry<String, List<Either<String, FileValue<D>>>> e : r.entrySet())

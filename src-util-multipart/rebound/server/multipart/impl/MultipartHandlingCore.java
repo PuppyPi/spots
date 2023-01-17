@@ -23,7 +23,6 @@ import rebound.util.MIMEHeaders.Header;
 import rebound.util.container.ContainerInterfaces.ObjectContainer;
 import rebound.util.container.SimpleContainers.SimpleObjectContainer;
 import rebound.util.functional.FunctionInterfaces.UnaryProcedure;
-import rebound.util.functional.throwing.FunctionalInterfacesThrowingCheckedExceptionsStandard.RunnableThrowingIOException;
 
 /**
  * "MIME Multipart" is a way of doing form data posting from HTTP client to server that works for anything.
@@ -42,7 +41,7 @@ public class MultipartHandlingCore
 	/**
 	 * @return the Form Parameters read (not just necessarily files, also other things too!!)  Will be null if and only if kill400 was called! otherwise a list that may or may not be empty (technically a valid MIME Multipart Message doesn't have to have an actual file upload in it!)
 	 */
-	public static @Nullable <D> Map<String, List<Either<String, FileValue<D>>>> handle(HttpServletRequest request, AcceptFilter acceptFilter, Datastore<D> datastore, RunnableThrowingIOException kill400) throws IOException
+	public static @Nullable <D> Map<String, List<Either<String, FileValue<D>>>> handle(HttpServletRequest request, AcceptFilter acceptFilter, Datastore<D> datastore) throws IOException
 	{
 		ObjectContainer<Map<String, List<Either<String, FileValue<D>>>>> formParametersFoundC = new SimpleObjectContainer<>();
 		
@@ -70,7 +69,6 @@ public class MultipartHandlingCore
 					catch (MimeTypeParseException exc)
 					{
 						//Syntax Error
-						kill400.run();
 						return null;
 					}
 				}
@@ -88,7 +86,6 @@ public class MultipartHandlingCore
 			if (cbound == null || cbound.length() == 0)
 			{
 				//No Boundary!
-				kill400.run();
 				return null;
 			}
 			
@@ -114,7 +111,6 @@ public class MultipartHandlingCore
 				}
 				catch (MimeTypeParseException exc)
 				{
-					kill400.run();
 					return null;
 				}
 			}
@@ -124,7 +120,6 @@ public class MultipartHandlingCore
 			
 			if (contentDispositionHeader == null)
 			{
-				kill400.run();
 				return null;
 			}
 			else if (contentDispositionHeader.getValue().equals("form-data"))
@@ -134,10 +129,7 @@ public class MultipartHandlingCore
 					formFieldName = contentDispositionHeader.getParameterValue("name");
 					
 					if (formFieldName == null || formFieldName.length() == 0)
-					{
-						kill400.run();
 						return null;
-					}
 				}
 				
 				if (formFieldName != null && formFieldName.length() > 0)
@@ -209,10 +201,7 @@ public class MultipartHandlingCore
 							
 							//Make sure it's not rejected (for mixed, this is just a once-over check of all files at once, because they share a lot of attributes)
 							if (!checkAccept(acceptFilter, request, formFieldName, !multipleFileValues, headers))
-							{
-								kill400.run();
 								return null;
-							}
 							
 							
 							
@@ -259,10 +248,7 @@ public class MultipartHandlingCore
 									if (cbound != null)
 										filesBoundary = cbound.getBytes("ASCII");
 									if (filesBoundary == null)
-									{
-										kill400.run();
 										return null;
-									}
 								}
 								
 								MultipartStream filesMultipartStream = new MultipartStream(multipartStream.newInputStream());
@@ -281,7 +267,6 @@ public class MultipartHandlingCore
 										}
 										catch (MimeTypeParseException exc)
 										{
-											kill400.run();
 											return null;
 										}
 									}
@@ -298,10 +283,7 @@ public class MultipartHandlingCore
 									{
 										//Make sure it's not rejected
 										if (!checkAccept(acceptFilter, request, formFieldName, false, currFileHeaders))
-										{
-											kill400.run();
 											return null;
-										}
 										
 										String currContentType = currFileHeaders.getHeaderValue("Content-Type");
 										
