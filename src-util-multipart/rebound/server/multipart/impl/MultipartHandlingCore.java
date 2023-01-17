@@ -209,7 +209,10 @@ public class MultipartHandlingCore
 							
 							//Make sure it's not rejected (for mixed, this is just a once-over check of all files at once, because they share a lot of attributes)
 							if (!checkAccept(acceptFilter, request, formFieldName, !multipleFileValues, headers))
+							{
+								kill400.run();
 								return null;
+							}
 							
 							
 							
@@ -294,7 +297,10 @@ public class MultipartHandlingCore
 									{
 										//Make sure it's not rejected
 										if (!checkAccept(acceptFilter, request, formFieldName, false, currFileHeaders))
+										{
+											kill400.run();
 											return null;
+										}
 										
 										String currContentType = currFileHeaders.getHeaderValue("Content-Type");
 										
