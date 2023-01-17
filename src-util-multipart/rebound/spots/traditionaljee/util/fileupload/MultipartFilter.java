@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import rebound.server.fileupload.AcceptFilter;
 import rebound.server.fileupload.Datastore;
 import rebound.server.fileupload.FileValue;
-import rebound.server.fileupload.impl.MultipartHandlingCore;
+import rebound.server.multipart.impl.MultipartHandlingCore;
 import rebound.spots.traditionaljee.util.AbstractHTTPFilter;
 import rebound.spots.traditionaljee.util.MutableParameterServletRequest;
 import rebound.util.Either;

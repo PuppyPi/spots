@@ -1,4 +1,4 @@
-package rebound.server.fileupload.impl;
+package rebound.server.multipart.impl;
 
 import static java.util.Collections.*;
 import java.awt.datatransfer.MimeTypeParseException;
@@ -15,8 +15,8 @@ import rebound.io.util.TextIOUtilities;
 import rebound.server.fileupload.AcceptFilter;
 import rebound.server.fileupload.Datastore;
 import rebound.server.fileupload.FileValue;
-import rebound.server.fileupload.fromothers.MimeTypeParameterList;
-import rebound.server.fileupload.fromothers.MultipartStream;
+import rebound.server.multipart.fromothers.MimeTypeParameterList;
+import rebound.server.multipart.fromothers.MultipartStream;
 import rebound.util.Either;
 import rebound.util.MIMEHeaders;
 import rebound.util.MIMEHeaders.Header;

@@ -7,7 +7,7 @@
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
-package rebound.server.fileupload.fromothers;
+package rebound.server.multipart.fromothers;
 
 import java.awt.datatransfer.MimeTypeParseException;
 import java.util.Enumeration;

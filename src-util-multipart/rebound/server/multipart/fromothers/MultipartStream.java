@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package rebound.server.fileupload.fromothers;
+package rebound.server.multipart.fromothers;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
