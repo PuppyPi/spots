@@ -9,7 +9,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import rebound.server.fileupload.AcceptFilter;
-import rebound.spots.traditionaljee.util.fileupload.MultipartFilter;
+import rebound.spots.traditionaljee.multipart.MultipartFilter;
 import rebound.spots.util.binding.annotated.typeconversion.ConverterSpecifier;
 
 /**
