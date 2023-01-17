@@ -7,8 +7,8 @@ package rebound.spots.util.binding.annotated.typeconversion.typeconverters.scala
 import static rebound.util.collections.BasicCollectionUtilities.*;
 import java.lang.annotation.Annotation;
 import java.util.List;
+import rebound.server.fileupload.FileValue;
 import rebound.spots.ActionBeanContext;
-import rebound.spots.traditionaljee.util.fileupload.FileValue;
 import rebound.spots.traditionaljee.util.fileupload.MultipartFilter;
 import rebound.spots.util.binding.annotated.typeconversion.TypeConverter;
 

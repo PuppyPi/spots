@@ -2,7 +2,7 @@
  * Created on Nov 25, 2007
  * 	by the great Eclipse(c)
  */
-package rebound.spots.traditionaljee.util.fileupload;
+package rebound.server.fileupload;
 
 import java.io.IOException;
 import java.io.InputStream;

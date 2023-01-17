@@ -8,7 +8,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import rebound.spots.traditionaljee.util.fileupload.AcceptFilter;
+import rebound.server.fileupload.AcceptFilter;
 import rebound.spots.traditionaljee.util.fileupload.MultipartFilter;
 import rebound.spots.util.binding.annotated.typeconversion.ConverterSpecifier;
 
