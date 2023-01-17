@@ -4,3 +4,8 @@
 
 • Make the String value() parameter in the FormBoundXyz things default to "" and let the code use the field name when it's that!!
 • Provide the entire ActionBean not just its context to the Type Converter Specifiers (FormBoundXyz) so that site-specific custom ones can access the site-specific context, like the database connection! X3
+
+• Rename XyzWrapper to XyzDecorator since that's more specific (and googleable!)
+	+ Decorators are Wrappers where the underlying API is the same as the exposed API
+	+ Adapters are Wrappers where they're different!
+	I like this nomenclature! :D
