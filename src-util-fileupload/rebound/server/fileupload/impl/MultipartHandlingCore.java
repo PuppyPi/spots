@@ -25,9 +25,13 @@ import rebound.util.container.SimpleContainers.SimpleObjectContainer;
 import rebound.util.functional.FunctionInterfaces.UnaryProcedure;
 import rebound.util.functional.throwing.FunctionalInterfacesThrowingCheckedExceptionsStandard.RunnableThrowingIOException;
 
-public class FileUploadHandlingCore
+/**
+ * "MIME Multipart" is a way of doing form data posting from HTTP client to server that works for anything.
+ * But it is the *only* way files are uploaded!
+ */
+public class MultipartHandlingCore
 {
-	public static boolean isRequestTypeToBeHandled(HttpServletRequest request)
+	public static boolean isRequestMultipart(HttpServletRequest request)
 	{
 		//Only intercept the request if it's multipart, and thus unintelligible to the servlet container
 		return request.getContentType() != null && request.getContentType().startsWith("multipart");

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import rebound.server.fileupload.AcceptFilter;
 import rebound.server.fileupload.Datastore;
 import rebound.server.fileupload.FileValue;
-import rebound.server.fileupload.impl.FileUploadHandlingCore;
+import rebound.server.fileupload.impl.MultipartHandlingCore;
 import rebound.spots.traditionaljee.util.AbstractHTTPFilter;
 import rebound.spots.traditionaljee.util.MutableParameterServletRequest;
 import rebound.util.Either;
@@ -48,13 +48,13 @@ extends AbstractHTTPFilter
 		MutableParameterServletRequest mutreq = null;
 		
 		//Only intercept the request if it's multipart, and thus unintelligible to the servlet container
-		if (FileUploadHandlingCore.isRequestTypeToBeHandled(request))
+		if (MultipartHandlingCore.isRequestMultipart(request))
 		{
 			AcceptFilter acceptFilter = getAcceptFilter(request, response);
 			Datastore<D> datastore = getDatastore(request, response);
 			
 			
-			Map<String, List<Either<String, FileValue<D>>>> r = FileUploadHandlingCore.handle(request, acceptFilter, datastore, () -> this.kill400(request, response));
+			Map<String, List<Either<String, FileValue<D>>>> r = MultipartHandlingCore.handle(request, acceptFilter, datastore, () -> this.kill400(request, response));
 			
 			if (r == null)  //error
 				return;
