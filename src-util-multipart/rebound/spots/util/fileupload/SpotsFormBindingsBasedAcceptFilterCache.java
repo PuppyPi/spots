@@ -12,9 +12,9 @@ import rebound.util.collections.FilterAwayReturnPath;
 
 public class SpotsFormBindingsBasedAcceptFilterCache
 {
-	protected Map<Class, AcceptFilter> exhaustiveEagerCache;
+	protected Map<Class<?>, AcceptFilter> exhaustiveEagerCache;
 	
-	public SpotsFormBindingsBasedAcceptFilterCache(Iterable<Class> exhaustiveListOfAllActionBeanClasses)
+	public SpotsFormBindingsBasedAcceptFilterCache(Iterable<Class<?>> exhaustiveListOfAllActionBeanClasses)
 	{
 		exhaustiveEagerCache = maptodictSameKeys(c ->
 		{
@@ -29,12 +29,12 @@ public class SpotsFormBindingsBasedAcceptFilterCache
 	}
 	
 	
-	public @Nullable AcceptFilter getAcceptFilterForActionBeanClassOrNull(Class actionBeanClass)
+	public @Nullable AcceptFilter getAcceptFilterForActionBeanClassOrNull(Class<?> actionBeanClass)
 	{
 		return exhaustiveEagerCache.get(actionBeanClass);
 	}
 	
-	public @Nonnull AcceptFilter getAcceptFilterForActionBeanClass(Class actionBeanClass)
+	public @Nonnull AcceptFilter getAcceptFilterForActionBeanClass(Class<?> actionBeanClass)
 	{
 		AcceptFilter r = getAcceptFilterForActionBeanClassOrNull(actionBeanClass);
 		return r == null ? NullAcceptFilter.I : r;
