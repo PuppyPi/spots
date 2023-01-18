@@ -50,7 +50,7 @@ implements AcceptFilter
 	
 	
 	
-	public static List<FormBoundFiles> getFileBindings(Class actionBeanClass)
+	public static @Nonnull List<FormBoundFiles> getFileBindings(Class actionBeanClass)
 	{
 		Field[] fields = AngryReflectionUtility.getAllFields(actionBeanClass);
 		
