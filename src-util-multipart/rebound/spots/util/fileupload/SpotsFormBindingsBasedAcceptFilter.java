@@ -56,12 +56,8 @@ implements AcceptFilter
 		List<FormBoundFiles> bindings = new ArrayList<>();
 		{
 			for (Field f : fields)
-			{
 				if (f.isAnnotationPresent(FormBoundFiles.class))
-				{
 					bindings.add(f.getAnnotation(FormBoundFiles.class));
-				}
-			}
 		}
 		
 		return trimmed(bindings);
