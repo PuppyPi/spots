@@ -1,5 +1,6 @@
 package rebound.spots.util.fileupload;
 
+import static java.util.Collections.*;
 import static java.util.Objects.*;
 import static rebound.util.collections.CollectionUtilities.*;
 import java.lang.reflect.Field;
@@ -53,13 +54,20 @@ implements AcceptFilter
 	{
 		Field[] fields = AngryReflectionUtility.getAllFields(actionBeanClass);
 		
-		List<FormBoundFiles> bindings = new ArrayList<>();
+		List<FormBoundFiles> bindings = null;
 		{
 			for (Field f : fields)
+			{
 				if (f.isAnnotationPresent(FormBoundFiles.class))
+				{
+					if (bindings == null)
+						bindings = new ArrayList<>();
+					
 					bindings.add(f.getAnnotation(FormBoundFiles.class));
+				}
+			}
 		}
 		
-		return trimmed(bindings);
+		return bindings == null ? emptyList() : trimmed(bindings);
 	}
 }
