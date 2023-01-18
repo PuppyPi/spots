@@ -1,9 +1,11 @@
 package rebound.spots.util.fileupload;
 
+import static java.util.Objects.*;
 import static rebound.util.collections.CollectionUtilities.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Nonnull;
 import javax.servlet.ServletRequest;
 import rebound.server.fileupload.AcceptFilter;
 import rebound.spots.util.binding.annotated.typeconversion.typeconverters.scalar.FormBoundFiles;
@@ -12,14 +14,14 @@ import rebound.util.AngryReflectionUtility;
 public class SpotsFormBindingsBasedAcceptFilter
 implements AcceptFilter
 {
-	protected List<FormBoundFiles> bindings;
+	protected final @Nonnull List<FormBoundFiles> bindings;
 	
-	public SpotsFormBindingsBasedAcceptFilter(List<FormBoundFiles> bindings)
+	public SpotsFormBindingsBasedAcceptFilter(@Nonnull List<FormBoundFiles> bindings)
 	{
-		this.bindings = bindings;
+		this.bindings = requireNonNull(bindings);
 	}
 	
-	public SpotsFormBindingsBasedAcceptFilter(Class actionBeanClass)
+	public SpotsFormBindingsBasedAcceptFilter(@Nonnull Class actionBeanClass)
 	{
 		this(getFileBindings(actionBeanClass));
 	}
