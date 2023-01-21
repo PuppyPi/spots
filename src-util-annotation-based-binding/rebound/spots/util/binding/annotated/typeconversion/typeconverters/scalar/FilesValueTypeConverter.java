@@ -4,6 +4,7 @@
  */
 package rebound.spots.util.binding.annotated.typeconversion.typeconverters.scalar;
 
+import static java.util.Collections.*;
 import static rebound.util.collections.BasicCollectionUtilities.*;
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -22,6 +23,9 @@ implements TypeConverter<FormBoundFiles>
 			throw new ClassCastException();
 		
 		List<FileValue<?>> filesvalue = (List<FileValue<?>>) context.getRequest().getAttribute(MultipartFilter.STORAGE_ATTRIBUTE_PREFIX+specifier.value());
+		
+		if (filesvalue == null)
+			filesvalue = emptyList();
 		
 		if (specifier.singletonOnly())
 			return getSingleElementOrNullIfNone(filesvalue);  //the AcceptFilter should have made sure more than one file wasn't allowed
