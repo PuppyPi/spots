@@ -1,9 +1,6 @@
-/*
- * Created on May 28, 2007
- * 	by the great Eclipse(c)
- */
 package rebound.simplejee;
 
+import static java.util.Objects.*;
 import static rebound.util.collections.CollectionUtilities.*;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -18,12 +15,13 @@ import rebound.annotations.semantic.allowedoperations.WritableValue;
 public class HttpServletRequestWithNewParametersDecorator
 extends HttpServletRequestWrapper
 {
-	protected Map<String, List<String>> newParameters;
+	protected final Map<String, List<String>> newParameters;
 	
 	
 	public HttpServletRequestWithNewParametersDecorator(HttpServletRequest underlying, Map<String, List<String>> newParameters)
 	{
-		super(underlying);
+		super(requireNonNull(underlying));
+		this.newParameters = requireNonNull(newParameters);
 	}
 	
 	
