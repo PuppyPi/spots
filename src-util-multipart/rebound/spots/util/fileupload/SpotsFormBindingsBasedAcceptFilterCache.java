@@ -1,5 +1,6 @@
 package rebound.spots.util.fileupload;
 
+import static java.util.Objects.*;
 import static rebound.util.collections.CollectionUtilities.*;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,8 @@ public class SpotsFormBindingsBasedAcceptFilterCache
 	
 	public SpotsFormBindingsBasedAcceptFilterCache(Iterable<Class<?>> exhaustiveListOfAllActionBeanClasses)
 	{
+		requireNonNull(exhaustiveListOfAllActionBeanClasses);
+		
 		exhaustiveEagerCache = maptodictSameKeys(c ->
 		{
 			List<FormBoundFiles> b = SpotsFormBindingsBasedAcceptFilter.getFileBindings(c);
